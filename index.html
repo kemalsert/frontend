@@ -6,90 +6,67 @@
     <title>Fetva Kütüphanesi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+        body { background-color: #0B1120; color: #F8FAFC; font-family: 'Inter', sans-serif; background-image: radial-gradient(circle at 50% 0%, #152238 0%, transparent 50%); }
+        h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
+        .hero-bg { position: relative; }
+        .hero-bg::after { content: ''; position: absolute; bottom: 0; right: 0; width: 50%; height: 100%; background: url('https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') no-repeat bottom right; background-size: contain; opacity: 0.15; mask-image: linear-gradient(to left, black, transparent); -webkit-mask-image: linear-gradient(to left, black, transparent); z-index: -1; }
+        .glass-card { background: #131C31; border: 1px solid #1E293B; border-radius: 12px; transition: all 0.3s ease; }
+        .glass-card:hover { border-color: #D4AF37; box-shadow: 0 4px 20px rgba(212, 175, 55, 0.1); transform: translateY(-2px); }
+        .text-gold { color: #D4AF37; } .border-gold { border-color: #D4AF37; }
+        .bg-gold { background-color: #D4AF37; color: #0B1120; } .bg-gold:hover { background-color: #E8C34B; }
+    </style>
 </head>
 <body class="min-h-screen">
-
-    <!-- Header -->
     <header class="container mx-auto px-6 py-4 flex justify-between items-center border-b border-gray-800">
-        <div class="flex items-center gap-3">
-            <i class="fa-solid fa-book-quran text-gold text-2xl"></i>
-            <div>
-                <h1 class="font-serif font-bold text-xl tracking-wider">FETVA KÜTÜPHANESİ</h1>
-                <p class="text-[10px] text-gray-400">İlim öğren, amel et, fayda ulaştır.</p>
-            </div>
-        </div>
-        
-        <div class="hidden md:flex bg-[#131C31] rounded-full px-4 py-2 border border-gray-700 w-1/3">
-            <input type="text" placeholder="Sorunuzu veya konuyu yazın..." class="bg-transparent border-none outline-none text-sm w-full text-white">
-            <i class="fa-solid fa-search text-gray-400 mt-1"></i>
-        </div>
-
-        <div class="flex items-center gap-4">
-            <button class="text-gray-400 hover:text-white"><i class="fa-solid fa-moon"></i></button>
-            <button onclick="document.getElementById('soruModal').classList.remove('hidden')" class="border border-gray-600 rounded-full px-4 py-2 text-sm hover:border-gold transition flex items-center gap-2">
-                <i class="fa-regular fa-circle-question"></i> Soru Sor
-            </button>
-        </div>
+        <div class="flex items-center gap-3"><i class="fa-solid fa-book-quran text-gold text-2xl"></i><div><h1 class="font-serif font-bold text-xl tracking-wider">FETVA KÜTÜPHANESİ</h1><p class="text-[10px] text-gray-400">İlim öğren, amel et, fayda ulaştır.</p></div></div>
     </header>
 
-    <!-- Hero Section -->
     <main class="container mx-auto px-6 py-16 hero-bg">
         <div class="max-w-2xl">
             <h2 class="text-5xl font-serif mb-6 leading-tight">Doğruyu öğren,<br><span class="text-gray-400">gönül huzurunu bul.</span></h2>
-            <p class="text-gray-400 mb-8">Kur'an ve sünnet ışığında, mezheplerin görüşleriyle hazırlanmış güvenilir fetvalar, hadisler ve İslami terimler.</p>
-            
-            <div class="flex gap-4">
-                <button class="bg-gold px-6 py-3 rounded-lg font-medium flex items-center gap-2"><i class="fa-solid fa-book-open"></i> Tüm Fetvalar</button>
-                <button class="glass-card px-6 py-3 rounded-lg font-medium flex items-center gap-2"><i class="fa-solid fa-layer-group text-gold"></i> Kategoriler</button>
-            </div>
+            <p class="text-gray-400 mb-8">Kur'an ve sünnet ışığında, mezheplerin görüşleriyle hazırlanmış güvenilir fetvalar.</p>
         </div>
 
-        <!-- Filters -->
-        <div class="flex flex-wrap gap-4 mt-16">
-            <button class="glass-card px-5 py-2 rounded-full text-sm flex items-center gap-2 border-gold"><i class="fa-solid fa-mosque text-gold"></i> İbadet</button>
-            <button class="glass-card px-5 py-2 rounded-full text-sm flex items-center gap-2"><i class="fa-solid fa-handshake text-gold"></i> Muamelat</button>
-            <button class="glass-card px-5 py-2 rounded-full text-sm flex items-center gap-2"><i class="fa-solid fa-users text-gold"></i> Aile</button>
-            <button class="glass-card px-5 py-2 rounded-full text-sm flex items-center gap-2"><i class="fa-solid fa-calendar-days text-gold"></i> Güncel</button>
-        </div>
+        <div class="mt-12 flex justify-between items-center mb-6"><h3 class="text-xl font-serif">Son Eklenen Fetvalar</h3></div>
+        <div id="fetva-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"><div class="text-gray-500">Veriler Yükleniyor...</div></div>
 
-        <!-- Section: Fetvalar -->
-        <div class="mt-12 flex justify-between items-center mb-6">
-            <h3 class="text-xl font-serif">Son Eklenen Fetvalar</h3>
-            <a href="#" class="text-sm text-gold hover:underline">Tümünü Gör <i class="fa-solid fa-arrow-right text-xs"></i></a>
-        </div>
-        <div id="fetva-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- JS ile Worker'dan dolacak -->
-            <div class="text-center text-gray-500 py-10 col-span-4">Veriler yükleniyor...</div>
-        </div>
-
-        <!-- Section: Terimler & Hadisler (İsteğe bağlı grid) -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
-            <div>
-                <h3 class="text-xl font-serif mb-6 border-b border-gray-800 pb-2">İslami Terimler Sözlüğü</h3>
-                <div id="terim-container" class="space-y-4"></div>
-            </div>
-            <div>
-                <h3 class="text-xl font-serif mb-6 border-b border-gray-800 pb-2">Günün Hadisleri</h3>
-                <div id="hadis-container" class="space-y-4"></div>
-            </div>
+            <div><h3 class="text-xl font-serif mb-6 border-b border-gray-800 pb-2">İslami Terimler Sözlüğü</h3><div id="terim-container" class="space-y-4"></div></div>
+            <div><h3 class="text-xl font-serif mb-6 border-b border-gray-800 pb-2">Günün Hadisleri</h3><div id="hadis-container" class="space-y-4"></div></div>
         </div>
     </main>
 
-    <!-- Soru Sor Modal -->
-    <div id="soruModal" class="fixed inset-0 bg-black bg-opacity-80 hidden flex justify-center items-center z-50">
-        <div class="glass-card w-full max-w-md p-6">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-serif text-gold">Soru Sor</h3>
-                <button onclick="document.getElementById('soruModal').classList.add('hidden')" class="text-gray-400 hover:text-white"><i class="fa-solid fa-times"></i></button>
-            </div>
-            <input type="text" id="s_isim" placeholder="İsminiz (İsteğe bağlı)" class="w-full bg-[#0B1120] border border-gray-700 rounded p-3 mb-3 text-white">
-            <input type="email" id="s_email" placeholder="E-posta (Cevap için)" class="w-full bg-[#0B1120] border border-gray-700 rounded p-3 mb-3 text-white">
-            <textarea id="s_soru" placeholder="Sorunuzu detaylıca yazın..." rows="4" class="w-full bg-[#0B1120] border border-gray-700 rounded p-3 mb-4 text-white"></textarea>
-            <button onclick="soruGonder()" class="w-full bg-gold text-black font-bold py-3 rounded">Gönder</button>
-        </div>
-    </div>
+    <script>
+        // DİKKAT: AŞAĞIDAKİ ADRESİ KENDİ WORKER ADRESİNLE DEĞİŞTİR VE SONUNA /api EKLE
+        const API_URL = "https://my-worker.senin-adin.workers.dev/api";
 
-    <script src="js/app.js"></script>
+        async function load() {
+            try {
+                // Fetvalar
+                const fRes = await fetch(`${API_URL}/fetvalar`);
+                const fData = await fRes.json();
+                document.getElementById('fetva-container').innerHTML = fData.map(item => `
+                    <a href="detay.html?slug=${item.slug}" class="glass-card p-5 block group">
+                        <div class="bg-[#1C261E] inline-block text-green-400 text-xs px-2 py-1 rounded border border-green-900 mb-3">${item.kategori}</div>
+                        <h3 class="font-serif text-lg mb-8 group-hover:text-gold transition">${item.soru}</h3>
+                    </a>`).join('');
+
+                // Terimler
+                const tRes = await fetch(`${API_URL}/terimler`);
+                const tData = await tRes.json();
+                document.getElementById('terim-container').innerHTML = tData.map(item => `
+                    <div class="glass-card p-4"><h4 class="font-bold text-gold">${item.terim}</h4><p class="text-sm text-gray-300 mt-2">${item.ceviri}</p></div>`).join('');
+
+                // Hadisler
+                const hRes = await fetch(`${API_URL}/hadisler`);
+                const hData = await hRes.json();
+                document.getElementById('hadis-container').innerHTML = hData.map(item => `
+                    <div class="glass-card p-4 border-l-2 border-l-green-500"><p class="text-sm italic text-gray-300">"${item.hadis}"</p><p class="text-xs text-gray-500 mt-2">— ${item.ravi}</p></div>`).join('');
+            } catch(e) { console.log(e); }
+        }
+        load();
+    </script>
 </body>
 </html>
